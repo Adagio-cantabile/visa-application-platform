@@ -1,6 +1,6 @@
 class StaffsController < ApplicationController
   before_action :check_access_domain
-  
+
   def index
     @staffs = current_staff.corporate.staffs
   end
@@ -12,10 +12,10 @@ class StaffsController < ApplicationController
     staff = Staff.new(staff_params)
     staff.corporate_id = current_staff.corporate_id
     staff.save!
-    @m = 'Created successfully'
+    @message = 'Created successfully'
     render 'bootbox.js.erb'
   end
-  
+
   def edit
   end
 
@@ -30,7 +30,7 @@ class StaffsController < ApplicationController
     staff.name = staff_params[:name]
     p staff
     staff.save!
-    @m = 'Updated successfully'
+    @message = 'Updated successfully'
     render 'bootbox.js.erb'
   end
 

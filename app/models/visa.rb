@@ -8,7 +8,7 @@ class Visa < ActiveRecord::Base
   validates :visa_type, numericality: true, presence: true
   validates :applicant_id, presence: true
   validates :note, length: { maximum: 200 }
-  
+
   def successful_process
     SUCCESSFUL_VISA[country_abbr][visa_type][1]
   end
@@ -20,13 +20,14 @@ class Visa < ActiveRecord::Base
   def history_statuses
     statuses.order('status_code asc')
   end
-  
+
   def visa_type_name
     SUCCESSFUL_VISA[country_abbr][visa_type][0]
   end
 
   def self.available_countries
-    SUCCESSFUL_VISA.map {|k,v| k}
+    #SUCCESSFUL_VISA.map {|k,v| k}
+    SUCCESSFUL_VISA.keys  # 你能获得SUCCESSFUL_VISA 的keys 组成的数组 和上面效果一样
   end
 
   def self.visa_types(country)

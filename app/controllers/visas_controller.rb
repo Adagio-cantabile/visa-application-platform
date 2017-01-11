@@ -1,6 +1,6 @@
 class VisasController < ApplicationController
   before_action :check_access_domain, except: [:search, :index]
-  
+
   def index
   end
 
@@ -28,9 +28,8 @@ class VisasController < ApplicationController
     visa.country_abbr = visa_params[:country_abbr]
     visa.visa_type = visa_params[:type]
     visa.save!
-    status = Status.new(status_code: 0, visa_id: visa.id, staff_id: current_staff.id)
-    status.save!
-    @m = 'created successfully'
+    Status.create!(status_code: 0, visa_id: visa.id, staff_id: current_staff.id)
+    @message = 'created successfully'
   end
 
   def edit
@@ -44,7 +43,7 @@ class VisasController < ApplicationController
     visa.destroy
     redirect_to action: 'management'
   end
-  
+
   def set_visa_type_options
     country = params[:country]
     types = Visa.visa_types(country)
@@ -58,7 +57,7 @@ class VisasController < ApplicationController
     passport_number = params[:passport_number]
     @applicant = Applicant.where('passport_number = ?', passport_number).last
   end
-  
+
   private
   def visa_params
     params.permit(:name, :passport_number, :phone_number, :mail_address, :country_abbr, :type)
