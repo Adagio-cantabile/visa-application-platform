@@ -23,6 +23,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'slim'
 gem 'slim-rails'
 gem 'bcrypt'
+gem 'kaminari'    # 增加分页gem 对列表页进行分页使用
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
